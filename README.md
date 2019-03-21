@@ -4,7 +4,7 @@ A program that encrypt content of a Folder - Images and Text Documents and after
 
 ### Requirements
   * OpenCV 4.0.0 
-  * Baisc Library
+  * Basic Library
   
 ### Files Allowed 
   * '.txt'
