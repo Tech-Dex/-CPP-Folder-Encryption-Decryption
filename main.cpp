@@ -14,15 +14,15 @@ vector < string > files;
 void read_files_names(){
   DIR *dir;
   struct dirent *it;
-  string extension[] = {".txt", ".jpg" ,".png"}; /// It works only for these files, but feel free to improve
+  string extension[] = {"txt", "jpg" ,"png"}; /// It works only for these files, but feel free to improve
 
   if ( (dir = opendir ("./ToEncryptFolder") ) != NULL ) ///Here you can change the path to another folder for scanning & modifying
   {
     while ( (it = readdir( dir )) != NULL )
     {
-      if ( string(it->d_name).length() > 5)
+      if ( string(it->d_name).length() > 4)
         for ( int j = 0 ; j < 4 ; ++j)
-          if ( string(it->d_name).substr(string(it->d_name).length()-4) == extension[j])
+          if ( string(it->d_name).substr(string(it->d_name).length()-3) == extension[j])
             files.push_back(string(it->d_name));
     }
 
@@ -59,7 +59,7 @@ void text_encrypt(string file_name){
 
 
 void image_encrypt (string image_name){
-  const int MAX = 1e4+79;
+  int MAX = 1e4+79;
   Mat image_to_encrypt ;
   double u = 3.94;
   vector< pair <double,int > > x;
@@ -111,8 +111,6 @@ void image_encrypt (string image_name){
 
 imwrite("./ToEncryptFolder/" + image_name, image_to_encrypt);
 
-waitKey(0);
-
 }
 int main()
 {
@@ -122,7 +120,7 @@ int main()
   for ( auto &it : files )
   {
     cout << it << "\n" ;
-    if ( it.substr(it.length()-4) == ".txt")
+    if ( it.substr(it.length()-3) == "txt" )
       text_encrypt( it );
     else
       image_encrypt( it );
